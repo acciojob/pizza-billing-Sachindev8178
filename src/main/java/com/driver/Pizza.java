@@ -4,32 +4,82 @@ public class Pizza {
 
     private int price;
     private Boolean isVeg;
-    private String bill;
+    private String bill = "";
+
+    private boolean cheeseAdded = false;
+    private boolean toppingsAdded = false;
+    private boolean takeawayAdded = false;
+    private boolean billGenerated = false;
+
+    private int basePrice;
+    private int totalPrice;
 
     public Pizza(Boolean isVeg){
         this.isVeg = isVeg;
-        // your code goes here
+
+        // Set base price
+        if(isVeg)
+            this.basePrice = 300;
+        else
+            this.basePrice = 400;
+
+        this.price = basePrice;
+        this.totalPrice = price;
+
+        bill += "Base Price Of The Pizza: " + this.basePrice + "\n";
     }
 
     public int getPrice(){
-
-        return this.price;
+        return this.totalPrice;
     }
 
     public void addExtraCheese(){
-        // your code goes here
+        if(!cheeseAdded){
+            totalPrice += 80;
+            cheeseAdded = true;
+        }
     }
 
     public void addExtraToppings(){
-        // your code goes here
+        if(!toppingsAdded){
+            if(isVeg)
+                totalPrice += 70;
+            else
+                totalPrice += 120;
+
+            toppingsAdded = true;
+        }
     }
 
     public void addTakeaway(){
-        // your code goes here
+        if(!takeawayAdded){
+            totalPrice += 20;
+            takeawayAdded = true;
+        }
     }
 
     public String getBill(){
-        // your code goes here
+
+        if(!billGenerated){
+
+            if(cheeseAdded)
+                bill += "Extra Cheese Added: 80\n";
+
+            if(toppingsAdded){
+                if(isVeg)
+                    bill += "Extra Toppings Added: 70\n";
+                else
+                    bill += "Extra Toppings Added: 120\n";
+            }
+
+            if(takeawayAdded)
+                bill += "Paperbag Added: 20\n";
+
+            bill += "Total Price: " + this.totalPrice + "\n";
+
+            billGenerated = true;
+        }
+
         return this.bill;
     }
 }
