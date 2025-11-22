@@ -12,6 +12,7 @@ public class Pizza {
     }
 
     public int getPrice(){
+
         return this.price;
     }
 
